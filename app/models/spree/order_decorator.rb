@@ -14,7 +14,7 @@ module Spree
 
       begin
         matched_line_items = self.line_items.select do |line_item|
-          line_item.taxable?
+          line_item.taxable? unless line_item.is_gift_card?
         end
 
         invoice_lines =[]
@@ -44,7 +44,7 @@ module Spree
             :origin_code => '1',
             :qty => 1,
             :amount => self.ship_total.to_s,
-            :tax_code => 'FR000000',
+            :tax_code => 'FR',
             :discounted => true,
             :item_code => 'SHIPPING'
         )
