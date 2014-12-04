@@ -81,6 +81,7 @@ module Spree
 
         #Tax
         if doc_type == 'SalesOrder'
+          self.adjustments.tax.destroy_all
           tax_adjustment = self.adjustments.new
           tax_adjustment.label = "Tax"
           tax_adjustment.originator_type = "Spree::TaxRate"
@@ -94,9 +95,6 @@ module Spree
         logger.debug 'Avatax Commit Failed!'
         logger.debug error.to_s
       end
-
     end
-
-
   end
 end
