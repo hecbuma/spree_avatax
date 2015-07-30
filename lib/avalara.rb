@@ -173,8 +173,10 @@ module Avalara
   end
 
   def self.avalara_address_error(response)
+    # We had to remove the out of range validation, street name validation
+    # because sometimes it was not working perfectly
+    # so Please do not add those validations again
     errors = []
-    errors << "Invalid Address1 : #{response}" if response.match(NUMBER_OUT_RANGE)
     errors << "Invalid PostalCode : #{response}" if response.match(INVALID_ZIPCODE)
     raise Error.new(errors) if errors.present?
   end
