@@ -14,7 +14,7 @@ module Spree
 
       begin
         matched_line_items = self.line_items.select do |line_item|
-          line_item.taxable?
+          line_item.taxable? unless line_item.is_gift_card?
         end
 
         invoice_lines =[]
